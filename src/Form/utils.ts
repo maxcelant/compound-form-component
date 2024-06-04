@@ -1,7 +1,7 @@
 import { DefaultValues, FieldValues } from 'react-hook-form';
 import * as yup from 'yup';
 
-export default function makeDefaultValues<T extends FieldValues>(schema: yup.ObjectSchema<T>): DefaultValues<T> {
+export function makeDefaultValues<T extends FieldValues>(schema: yup.ObjectSchema<T>): DefaultValues<T> {
   const defaultValues: any = {};
   const shape = schema.describe().fields;
 
@@ -22,4 +22,11 @@ export default function makeDefaultValues<T extends FieldValues>(schema: yup.Obj
   }
 
   return defaultValues;
+}
+
+export function toCapital(str: string) {
+  return str
+    .split(/(?=[A-Z])/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
+    .join(' ');
 }

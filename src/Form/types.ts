@@ -1,6 +1,6 @@
 import { FormState, Control, UseFormHandleSubmit } from 'react-hook-form';
 import { ButtonProps, GridSize, GridSpacing, SelectProps, TextFieldProps } from '@material-ui/core';
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import * as yup from 'yup';
 
 export interface FormContextProps {
@@ -8,7 +8,11 @@ export interface FormContextProps {
   control: Control<any>;
   formState: FormState<any>;
   schema: yup.ObjectSchema<any>;
+  state: CurrentFormState;
+  setState: Dispatch<SetStateAction<CurrentFormState>>;
 };
+
+export type CurrentFormState = {  status: 'init' | 'loading' | 'success' } | { status: 'error', message: string };
 
 export type ObjectLike = Record<string, any>;
 
@@ -21,6 +25,14 @@ export interface FormComponentProps {
   name: string;
   size?: GridSize; 
 };
+
+export interface AlertProps {
+  size?: GridSize;
+}
+
+export interface SuccessAlertProps extends AlertProps {
+  message: string;
+}
 
 export interface InputFieldProps extends FormComponentProps {
   options?: TextFieldProps;
@@ -49,6 +61,6 @@ export type RowProps = {
 
 export type SubmitProps = {
   title?: string;
-  onSubmit: (data: ObjectLike) => Promise<void>;
+  onSubmit: (data: ObjectLike) => Promise<any>;
   options?: ButtonProps;
 };

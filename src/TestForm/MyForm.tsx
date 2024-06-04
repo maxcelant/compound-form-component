@@ -21,7 +21,6 @@ export const MyForm = () => {
       <Form.Submit 
         options={{
           variant: 'outlined',
-          color: 'primary',
           fullWidth: true
         }}
         onSubmit={async (data: any) => console.log('submitted', data)}

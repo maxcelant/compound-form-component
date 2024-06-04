@@ -40,7 +40,7 @@ export interface InputFieldProps extends FormComponentProps {
 
 export type ListItem = {
   name: string;
-  value: string | number | boolean
+  value: string | number | boolean;
 };
 
 export interface FormItemComponent<TOptions extends ObjectLike> extends FormComponentProps {

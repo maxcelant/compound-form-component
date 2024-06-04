@@ -4,9 +4,8 @@ import FormContext from "./FormContext";
 import { SubmitProps } from "./types";
 
 function Submit({ onSubmit, title = 'Submit', options }: SubmitProps) {
-  const { handleSubmit, formState, setState } = useContext(FormContext);
-  if(!setState) return null;
-  if (!handleSubmit || !formState) return null;
+  const { handleSubmit, formState, state, setState } = useContext(FormContext);
+  if (!handleSubmit || !formState || !setState || !state) return null;
 
   const submitWrapper = handleSubmit(async (data) => {
     setState((prev) => ({ ...prev, status: 'loading' }));
@@ -20,7 +19,7 @@ function Submit({ onSubmit, title = 'Submit', options }: SubmitProps) {
 
   return (
     <Button 
-      disabled={!formState.isValid} 
+      disabled={state.status === 'loading' || !formState.isValid} 
       onClick={submitWrapper}
       style={{ marginTop: '20px' }}
       {...options} 

@@ -18,13 +18,15 @@ function Input({ name, options, size = 6 }: InputFieldProps) {
         <Controller
           name={name}
           control={control}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <TextField 
               aria-label={`${name.toString().toLowerCase()}-textfield` }
               label={toCapital(name)} 
               id={name}
               fullWidth 
               required
+              error={fieldState.error ? true : false}
+              helperText={fieldState.error ? fieldState.error.message : null}
               {...options}
               {...field}
             />

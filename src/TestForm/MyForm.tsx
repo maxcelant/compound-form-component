@@ -13,14 +13,17 @@ export const MyForm = () => {
       <Form.ErrorAlert />
       <Form.SuccessAlert message='GitHub Team created!' />
       <Form.Row>
-        <Form.Input name='teamName' />
+        <Form.Input name='teamName' options={{
+          placeholder: 'Enter a team name',
+        }}/>
         <Form.Input name='description' />
+        <Form.Input name='username' />
       </Form.Row>
       <Form.Row>
         <Form.Dropdown name='visibility' items={VISIBILITY_OPTIONS} />
         <Form.Dropdown name='notificationSetting' items={NOTIFICATION_OPTIONS} />
+        <Form.ShortName name='shortName' />
       </Form.Row>
-      <Form.ShortName name='shortName' size={6} />
       <Form.RadioGroup 
         name='pci' 
         direction='row'

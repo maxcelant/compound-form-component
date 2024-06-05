@@ -5,7 +5,7 @@ import FormContext from "./FormContext";
 import { RadioGroupProps } from "./types";
 
 
-function RadioGroup({ name, items, options, size = 6, direction = 'column' }: RadioGroupProps) {
+function RadioGroup({ name, items, options, size = 4, direction = 'column' }: RadioGroupProps) {
   const { control, schema } = useContext(FormContext);
   if (!schema) return null;
   if (!(name in schema.fields)) {

@@ -5,12 +5,15 @@ import FormContext from "./FormContext";
 import { InputFieldProps } from "./types";
 import { toCapital } from "./utils";
 
-function Input({ name, options, size = 6 }: InputFieldProps) {
+
+function Input({ name, options, size = 4 }: InputFieldProps) {
   const { control, schema } = useContext(FormContext);
   if (!schema) return null;
   if (!(name in schema.fields)) {
     throw new Error(`Invalid field name: ${name.toString()}`);
   }
+
+  if ((options && !('variant' in options)) || (!options)) options = { ...options, variant: 'outlined' };
 
   return (
     <Grid item xs={12} sm={12} md={size} style={{ marginTop: '10px' }}>

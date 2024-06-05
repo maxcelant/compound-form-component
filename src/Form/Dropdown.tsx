@@ -6,7 +6,7 @@ import { DropdownProps } from "./types";
 import { toCapital } from "./utils";
 
 
-function Dropdown({ name, items, options, size = 6 }: DropdownProps) {
+function Dropdown({ name, items, options, size = 4 }: DropdownProps) {
   const { control, schema } = useContext(FormContext);
   if (!schema) return null;
   if (!(name in schema.fields)) {

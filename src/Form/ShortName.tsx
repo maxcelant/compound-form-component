@@ -6,7 +6,7 @@ import FormContext from "./FormContext";
 import { FormComponentProps } from "./types";
 
 
-function ShortName({ name, size = 6 }: FormComponentProps) {
+function ShortName({ name, size = 4 }: FormComponentProps) {
   const { control, schema } = useContext(FormContext);
 
   if (!schema) return null;

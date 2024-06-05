@@ -3,7 +3,8 @@ import { useContext } from "react";
 import FormContext from "./FormContext";
 import { SubmitButtonProps } from "./types";
 
-function SubmitButton({ onSubmit, title = 'Submit', size = 6, options }: SubmitButtonProps) {
+
+function SubmitButton({ onSubmit, title = 'Submit', size = 4, options }: SubmitButtonProps) {
   const { handleSubmit, formState, state, setState } = useContext(FormContext);
   if (!handleSubmit || !formState || !setState || !state) return null;
 
@@ -16,6 +17,8 @@ function SubmitButton({ onSubmit, title = 'Submit', size = 6, options }: SubmitB
       setState((prev) => ({ ...prev, status: 'error', message: e.message }));
     }
   });
+
+  if ((options && !('color' in options)) || (!options)) options = { ...options, color: 'primary' };
 
   return (
     <Grid item xs={12} sm={12} md={size} style={{ marginTop: '10px' }}>

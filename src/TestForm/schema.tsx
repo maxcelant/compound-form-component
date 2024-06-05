@@ -19,6 +19,7 @@ export const GitHubTeamSchema = yup.object({
       "Invalid team name. Please adhere to GitHub's naming conventions.",
     ),
   description: yup.string(),
+  pci: yup.string().required(),
   visibility: yup
     .string()
     .oneOf(VISIBILITY_OPTIONS.map(o => o.value))

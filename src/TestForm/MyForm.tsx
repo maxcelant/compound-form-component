@@ -10,14 +10,12 @@ export const MyForm = () => {
         <Form.Input name='teamName' />
         <Form.Input name='description' />
       </Form.Row>
-      <Form.Row>
-        <Form.Dropdown name='visibility' items={VISIBILITY_OPTIONS} />
-        <Form.Dropdown name='notificationSetting' items={NOTIFICATION_OPTIONS} />
-      </Form.Row>
-      {/* <Form.RadioGroup name='pci' direction='row' items={[
+      <Form.Dropdown name='visibility' items={VISIBILITY_OPTIONS} />
+      <Form.Dropdown name='notificationSetting' items={NOTIFICATION_OPTIONS} />
+      <Form.RadioGroup name='pci' direction='row' items={[
         { name: 'PCI', value: 'pci'},
         { name: 'Non-PCI', value: 'non-pci'}
-      ]} /> */}
+      ]} />
       <Form.Submit 
         options={{
           variant: 'outlined',

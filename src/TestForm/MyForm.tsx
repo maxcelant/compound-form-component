@@ -13,11 +13,9 @@ export const MyForm = () => {
       <Form.ErrorAlert />
       <Form.SuccessAlert message='GitHub Team created!' />
       <Form.Row>
-        <Form.Input name='teamName' options={{
-          placeholder: 'Enter a team name',
-        }}/>
-        <Form.Input name='description' />
-        <Form.Input name='username' />
+        <Form.Input name='teamName'    />
+        <Form.Block />
+        <Form.Input name='username'    />
       </Form.Row>
       <Form.Row>
         <Form.Dropdown name='visibility' items={VISIBILITY_OPTIONS} />
@@ -30,7 +28,7 @@ export const MyForm = () => {
         size={6}
         items={[
           { name: 'PCI', value: 'pci'},
-          { name: 'Non-PCI', value: 'non-pci'}
+          { name: 'Non-PCI', value: 'non-pci'},
         ]} 
       />
       <Form.Row>
@@ -38,6 +36,7 @@ export const MyForm = () => {
           options={buttonOptions}
           onSubmit={async (data: any) => console.log('submitted', data)}
         />
+        <Form.Block />
         <Form.ClearButton options={buttonOptions} />
       </Form.Row>
     </Form>

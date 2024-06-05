@@ -14,6 +14,7 @@ import RadioGroup from './RadioGroup';
 import ShortName from './ShortName';
 import SubmitButton from './SubmitButton';
 import ClearButton from './ClearButton';
+import Block from './Block';
 
 
 function Form({ children, schema }: FormProps) {
@@ -35,6 +36,7 @@ function Form({ children, schema }: FormProps) {
   )
 }
 
+Form.Block        = Block;
 Form.SuccessAlert = SuccessAlert;
 Form.ErrorAlert   = ErrorAlert
 Form.Input        = Input;

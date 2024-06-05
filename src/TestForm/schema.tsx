@@ -20,6 +20,7 @@ export const GitHubTeamSchema = yup.object({
     ),
   description: yup.string(),
   pci: yup.string().required(),
+  shortName: yup.string().required(),
   visibility: yup
     .string()
     .oneOf(VISIBILITY_OPTIONS.map(o => o.value))

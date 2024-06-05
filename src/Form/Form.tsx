@@ -12,11 +12,12 @@ import Row from './Row';
 import Dropdown from './Dropdown';
 import RadioGroup from './RadioGroup';
 import ShortName from './ShortName';
-import Submit from './Submit';
+import SubmitButton from './SubmitButton';
+import ClearButton from './ClearButton';
 
 
 function Form({ children, schema }: FormProps) {
-  const { handleSubmit, control, formState, watch } = useForm<yup.InferType<typeof schema>>({
+  const { handleSubmit, control, formState, reset, watch } = useForm<yup.InferType<typeof schema>>({
     defaultValues: makeDefaultValues(schema),
     mode: 'onChange',
     shouldUnregister: true,
@@ -28,19 +29,20 @@ function Form({ children, schema }: FormProps) {
   console.log(JSON.stringify(watch(), null, 2))
   
   return (
-    <FormContext.Provider value={{ handleSubmit, control, formState, schema, state, setState }}>
+    <FormContext.Provider value={{ handleSubmit, control, formState, schema, reset, state, setState }}>
       { children }
     </FormContext.Provider>
   )
 }
 
 Form.SuccessAlert = SuccessAlert;
-Form.ErrorAlert = ErrorAlert
-Form.Input      = Input;
-Form.Dropdown   = Dropdown;
-Form.Row        = Row;
-Form.RadioGroup = RadioGroup;
-Form.ShortName  = ShortName;
-Form.Submit     = Submit; 
+Form.ErrorAlert   = ErrorAlert
+Form.Input        = Input;
+Form.Dropdown     = Dropdown;
+Form.Row          = Row;
+Form.RadioGroup   = RadioGroup;
+Form.ShortName    = ShortName;
+Form.ClearButton  = ClearButton;
+Form.SubmitButton = SubmitButton; 
 
 export default Form;

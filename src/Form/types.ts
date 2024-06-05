@@ -8,6 +8,7 @@ export interface FormContextProps {
   control: Control<any>;
   formState: FormState<any>;
   schema: yup.ObjectSchema<any>;
+  reset: (values?: any, options?: any) => void;
   state: CurrentFormState;
   setState: Dispatch<SetStateAction<CurrentFormState>>;
 };
@@ -59,8 +60,12 @@ export type RowProps = {
   spacing?: GridSpacing;
 };
 
-export type SubmitProps = {
+export interface DefaultButtonProps {
   title?: string;
-  onSubmit: (data: ObjectLike) => Promise<any>;
   options?: ButtonProps;
+  size?: GridSize;
+}
+
+export interface SubmitButtonProps extends DefaultButtonProps {
+  onSubmit: (data: ObjectLike) => Promise<any>;
 };

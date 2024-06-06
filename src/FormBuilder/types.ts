@@ -2,7 +2,7 @@ import { FormState, Control, UseFormHandleSubmit } from 'react-hook-form';
 import { ButtonProps, GridSize, GridSpacing, RadioGroupProps, SelectProps, TextFieldProps } from '@material-ui/core';
 import { Dispatch, ReactElement, ReactNode, SetStateAction } from "react";
 import * as yup from 'yup';
-import { ToolTip } from './components';
+import { FormToolTip } from './components';
 
 export type InferType<T extends yup.ObjectSchema<any>> = yup.InferType<T>;
 
@@ -24,7 +24,7 @@ export interface FormProps {
   children: ReactNode[];
 };
 
-export type ToolTipElement = ReactElement<typeof ToolTip>
+export type ToolTipElement = ReactElement<typeof FormToolTip>
 
 export interface GridSizeProps {
   size?: GridSize;
@@ -57,7 +57,7 @@ export type ListItem = {
 };
 
 export type RowProps = {
-  children: ReactNode[]
+  children: ReactNode[] | ReactNode;
   spacing?: GridSpacing;
 };
 

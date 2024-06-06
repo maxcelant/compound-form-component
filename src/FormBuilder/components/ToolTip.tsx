@@ -7,7 +7,7 @@ interface ToolTipProps {
   iconButtonProps?: IconButtonProps;
 }
 
-export function ToolTip({ message, iconButtonProps, ...tooltipProps }: ToolTipProps) {
+export function FormToolTip({ message, iconButtonProps, ...tooltipProps }: ToolTipProps) {
   return (
     <Tooltip title={message} {...tooltipProps}>
       <IconButton color="secondary" size="small" aria-label={message} {...iconButtonProps}>

@@ -31,16 +31,3 @@ export const GitHubTeamSchema = yup.object({
     .oneOf(NOTIFICATION_OPTIONS.map(o => o.value))
     .required(),
 });
-
-// export const GitHubTeamSchema = yup.object({
-//   teamName: yup.string().required(),
-//   description: yup.string().required(),
-//   username: yup.string().required(),
-//   authority: yup.string().required(),
-//   shortName: yup.string().required(),
-//   pci: yup.string().required(),
-//   notificationSetting: yup
-//     .string()
-//     .oneOf(NOTIFICATION_OPTIONS.map(o => o.value))
-//     .required(),
-// })

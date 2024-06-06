@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { CurrentFormState, FormProps, InferType } from './types';
 import { makeDefaultValues } from './utils';
 import FormContext from './FormContext';
-import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName, FormDivider, ToolTip } from './components';
+import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName, FormDivider, FormToolTip } from './components';
 
 function FormBuilder<T extends yup.ObjectSchema<any>>(schema: T) {
   
@@ -27,7 +27,7 @@ function FormBuilder<T extends yup.ObjectSchema<any>>(schema: T) {
       </FormContext.Provider>
     )
   }
-  Form.ToolTip  = ToolTip;
+  Form.ToolTip      = FormToolTip;
   Form.Divider      = FormDivider;
   Form.Block        = FormBlock;
   Form.SuccessAlert = FormSuccessAlert;

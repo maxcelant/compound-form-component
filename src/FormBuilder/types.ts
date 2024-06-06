@@ -31,6 +31,10 @@ export interface FormComponentProps extends GridSizeProps {
   name: string;
 };
 
+export interface ShortNameProps<T extends ObjectLike> extends GridSizeProps {
+  name: keyof T & string;
+}
+
 export interface SuccessAlertProps extends GridSizeProps {
   message: string;
 }

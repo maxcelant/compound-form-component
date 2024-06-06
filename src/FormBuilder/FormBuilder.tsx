@@ -36,7 +36,7 @@ function FormBuilder<T extends yup.ObjectSchema<any>>(schema: T) {
   Form.Dropdown     = FormDropdown<InferType<T>>;
   Form.Row          = FormRow;
   Form.RadioGroup   = FormRadioGroup<InferType<T>>;
-  Form.ShortName    = FormShortName;
+  Form.ShortName    = FormShortName<InferType<T>>;
   Form.ClearButton  = FormClearButton;
   Form.SubmitButton = FormSubmitButton; 
 

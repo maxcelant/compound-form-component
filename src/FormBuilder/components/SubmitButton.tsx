@@ -1,10 +1,10 @@
 import { Button, Grid } from "@material-ui/core";
-import { useContext } from "react";
-import FormContext from "./FormContext";
-import { SubmitButtonProps } from "./types";
+import React, { useContext } from "react";
+import FormContext from "../FormContext";
+import { SubmitButtonProps } from "../types";
 
 
-function SubmitButton({ onSubmit, title = 'Submit', size = 4, options }: SubmitButtonProps) {
+export function FormSubmitButton({ onSubmit, title = 'Submit', size = 4, options }: SubmitButtonProps) {
   const { handleSubmit, formState, state, setState } = useContext(FormContext);
   if (!handleSubmit || !formState || !setState || !state) return null;
 
@@ -18,20 +18,21 @@ function SubmitButton({ onSubmit, title = 'Submit', size = 4, options }: SubmitB
     }
   });
 
-  if ((options && !('color' in options)) || (!options)) options = { ...options, color: 'primary' };
+  let defaultOptions = options;
+  if ((options && !('color' in options)) || (!options)) {
+    defaultOptions = { ...options, color: 'primary' };
+  }
 
   return (
-    <Grid item xs={12} sm={12} md={size} style={{ marginTop: '10px' }}>
+    <Grid item xs={12} sm={size} md={size} style={{ marginTop: '10px' }}>
       <Button 
         disabled={state.status === 'loading' || !formState.isValid} 
         onClick={submitWrapper}
         style={{ marginTop: '20px' }}
-        {...options} 
+        {...defaultOptions} 
       >
         { title }
       </Button>
     </Grid>
   );
 }
-
-export default SubmitButton;

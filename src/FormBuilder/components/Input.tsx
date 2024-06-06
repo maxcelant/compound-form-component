@@ -1,22 +1,25 @@
 import { Grid, FormControl, TextField } from "@material-ui/core";
-import { useContext } from "react";
-import { Controller } from "react-hook-form";
-import FormContext from "./FormContext";
-import { InputFieldProps } from "./types";
-import { toCapital } from "./utils";
+import React, { useContext } from "react";
+import { Controller, FieldPath } from "react-hook-form";
+import FormContext from "../FormContext";
+import { InputFieldProps } from "../types";
+import { toCapital } from "../utils";
 
 
-function Input({ name, options, size = 4 }: InputFieldProps) {
+export function FormInput<T extends Record<string, any>>({ name, options, size = 4 }: InputFieldProps<T>) {
   const { control, schema } = useContext(FormContext);
   if (!schema) return null;
   if (!(name in schema.fields)) {
     throw new Error(`Invalid field name: ${name.toString()}`);
   }
 
-  if ((options && !('variant' in options)) || (!options)) options = { ...options, variant: 'outlined' };
+  let defaultOptions = options;
+  if ((options && !('variant' in options)) || (!options)) {
+    defaultOptions = { ...options, variant: 'outlined' };
+  }
 
   return (
-    <Grid item xs={12} sm={12} md={size} style={{ marginTop: '10px' }}>
+    <Grid item xs={12} sm={size} md={size} style={{ marginTop: '10px' }}>
       <FormControl variant="outlined" fullWidth>
         <Controller
           name={name}
@@ -30,7 +33,7 @@ function Input({ name, options, size = 4 }: InputFieldProps) {
               required
               error={fieldState.error ? true : false}
               helperText={fieldState.error ? fieldState.error.message : null}
-              {...options}
+              {...defaultOptions}
               {...field}
             />
           )}
@@ -39,5 +42,3 @@ function Input({ name, options, size = 4 }: InputFieldProps) {
     </Grid>
   );
 }
-
-export default Input;

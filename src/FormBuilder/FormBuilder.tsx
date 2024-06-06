@@ -5,17 +5,7 @@ import * as yup from 'yup'
 import { CurrentFormState, FormProps } from './types';
 import { makeDefaultValues } from './utils';
 import FormContext from './FormContext';
-import ErrorAlert from './ErrorAlert';
-import SuccessAlert from './SuccessAlert';
-import Input from './Input';
-import Row from './Row';
-import Dropdown from './Dropdown';
-import RadioGroup from './RadioGroup';
-import ShortName from './ShortName';
-import SubmitButton from './SubmitButton';
-import ClearButton from './ClearButton';
-import Block from './Block';
-
+import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName } from './components';
 
 function Form({ children, schema }: FormProps) {
   const { handleSubmit, control, formState, reset, watch } = useForm<yup.InferType<typeof schema>>({
@@ -36,15 +26,15 @@ function Form({ children, schema }: FormProps) {
   )
 }
 
-Form.Block        = Block;
-Form.SuccessAlert = SuccessAlert;
-Form.ErrorAlert   = ErrorAlert
-Form.Input        = Input;
-Form.Dropdown     = Dropdown;
-Form.Row          = Row;
-Form.RadioGroup   = RadioGroup;
-Form.ShortName    = ShortName;
-Form.ClearButton  = ClearButton;
-Form.SubmitButton = SubmitButton; 
+Form.Block        = FormBlock;
+Form.SuccessAlert = FormSuccessAlert;
+Form.ErrorAlert   = FormErrorAlert
+Form.Input        = FormInput;
+Form.Dropdown     = FormDropdown;
+Form.Row          = FormRow;
+Form.RadioGroup   = FormRadioGroup;
+Form.ShortName    = FormShortName;
+Form.ClearButton  = FormClearButton;
+Form.SubmitButton = FormSubmitButton; 
 
 export default Form;

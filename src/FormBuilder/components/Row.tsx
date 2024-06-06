@@ -1,12 +1,11 @@
+import React from "react";
 import { Grid } from "@material-ui/core";
-import { RowProps } from "./types";
+import { RowProps } from "../types";
 
-function Row({ spacing = 2, children }: RowProps) {
+export function FormRow({ spacing = 2, children }: RowProps) {
   return (
     <Grid container spacing={spacing} direction="row">
       { children }
     </Grid>
   )
 }
-
-export default Row;

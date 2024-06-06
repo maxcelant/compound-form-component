@@ -1,10 +1,10 @@
 import { Grid } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import React, { useContext } from "react";
-import { AlertProps } from "../types";
 import FormContext from "../FormContext";
+import { GridSizeProps } from "../types";
 
-export function FormErrorAlert({ size = 12 }: AlertProps) {
+export function FormErrorAlert({ size = 12 }: GridSizeProps) {
   const { state } = useContext(FormContext);
   if (!state) return null;
   if (!(state.status === 'error')) return <></>

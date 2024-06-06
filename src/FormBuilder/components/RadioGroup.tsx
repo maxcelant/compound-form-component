@@ -3,9 +3,10 @@ import React, { useContext } from "react";
 import { Controller } from "react-hook-form";
 import FormContext from "../FormContext";
 import { ObjectLike, RadioProps } from "../types";
+import { ToolTip } from "./ToolTip";
 
 
-export function FormRadioGroup<T extends ObjectLike>({ name, items, options, size = 4, direction = 'column' }: RadioProps<T>) {
+export function FormRadioGroup<T extends ObjectLike>({ name, items, options, tooltipMessage, size = 4, direction = 'column' }: RadioProps<T>) {
   const { control, schema } = useContext(FormContext);
   if (!schema) return null;
   return (
@@ -22,9 +23,14 @@ export function FormRadioGroup<T extends ObjectLike>({ name, items, options, siz
                   label={item.name}
                 />
               ))}
+              {tooltipMessage && ( 
+                  <Box ml={1}>
+                    <ToolTip message={tooltipMessage} />
+                  </Box>
+                )}
             </Box>
           </RG>
-        )} />
+          )} />
       </FormControl>
     </Grid>
   )

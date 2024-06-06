@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { CurrentFormState, FormProps, InferType } from './types';
 import { makeDefaultValues } from './utils';
 import FormContext from './FormContext';
-import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName, FormDivider } from './components';
+import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName, FormDivider, ToolTip } from './components';
 
 function FormBuilder<T extends yup.ObjectSchema<any>>(schema: T) {
   
@@ -27,18 +27,18 @@ function FormBuilder<T extends yup.ObjectSchema<any>>(schema: T) {
       </FormContext.Provider>
     )
   }
-  
+  Form.ToolTip  = ToolTip;
   Form.Divider      = FormDivider;
   Form.Block        = FormBlock;
   Form.SuccessAlert = FormSuccessAlert;
   Form.ErrorAlert   = FormErrorAlert
-  Form.Input        = FormInput<InferType<T>>;
-  Form.Dropdown     = FormDropdown<InferType<T>>;
   Form.Row          = FormRow;
-  Form.RadioGroup   = FormRadioGroup<InferType<T>>;
-  Form.ShortName    = FormShortName<InferType<T>>;
   Form.ClearButton  = FormClearButton;
   Form.SubmitButton = FormSubmitButton; 
+  Form.Input        = FormInput<InferType<T>>;
+  Form.Dropdown     = FormDropdown<InferType<T>>;
+  Form.RadioGroup   = FormRadioGroup<InferType<T>>;
+  Form.ShortName    = FormShortName<InferType<T>>;
 
   return Form;
 }

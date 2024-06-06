@@ -35,13 +35,16 @@ interface ComponentProps<TOptions extends ObjectLike, TName extends ObjectLike> 
   options?: TOptions;
 }
 
-export type InputFieldProps<TName extends ObjectLike> = ComponentProps<TextFieldProps, TName>;
+export type InputFieldProps<TName extends ObjectLike> = ComponentProps<TextFieldProps, TName> & {
+  tooltipMessage?: string;
+};
 
 interface ComponentWithItemsProps<TOptions extends ObjectLike, TName extends ObjectLike> extends ComponentProps<TOptions, TName> {
   items: ListItem[];
+  tooltipMessage?: string;
 }
 
-export type DropdownProps<TName extends ObjectLike> = ComponentWithItemsProps<SelectProps, TName>;
+export type DropdownProps<TName extends ObjectLike> = ComponentWithItemsProps<SelectProps, TName>
 
 export type RadioProps<TName extends ObjectLike> = ComponentWithItemsProps<RadioGroupProps, TName> & {
   direction?: 'row' | 'column'

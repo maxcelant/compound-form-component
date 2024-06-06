@@ -9,7 +9,7 @@ export function FormErrorAlert({ size = 12 }: AlertProps) {
   if (!state) return null;
   if (!(state.status === 'error')) return <></>
   return (
-    <Grid item xs={12} sm={size} md={size} style={{ marginTop: '10px' }}>
+    <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
       <Alert severity="error" aria-label="error-message">
         {state.message}
       </Alert>

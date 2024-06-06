@@ -24,7 +24,7 @@ export function FormSubmitButton({ onSubmit, title = 'Submit', size = 4, options
   }
 
   return (
-    <Grid item xs={12} sm={size} md={size} style={{ marginTop: '10px' }}>
+    <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
       <Button 
         disabled={state.status === 'loading' || !formState.isValid} 
         onClick={submitWrapper}

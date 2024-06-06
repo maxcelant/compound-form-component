@@ -18,6 +18,7 @@ export const MyForm = () => {
         <Form.Input name='description' />
         <Form.Input name='username' />
       </Form.Row>
+      <Form.Divider />
       <Form.Row>
         <Form.Dropdown name='visibility' items={VISIBILITY_OPTIONS} />
         <Form.Dropdown name='notificationSetting' items={NOTIFICATION_OPTIONS} />
@@ -33,7 +34,8 @@ export const MyForm = () => {
         ]} 
       />
       <Form.Row>
-        <Form.SubmitButton 
+        <Form.SubmitButton
+          size={3}
           options={buttonOptions}
           onSubmit={async (data: any) => console.log('submitted', data)}
         />

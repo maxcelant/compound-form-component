@@ -16,7 +16,7 @@ export function FormClearButton({ title = 'Clear', size = 4, options }: DefaultB
   }
 
   return (
-    <Grid item xs={12} sm={size} md={size} style={{ marginTop: '10px' }}>
+    <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
       <Button 
         onClick={handleReset}
         style={{ marginTop: '20px' }}

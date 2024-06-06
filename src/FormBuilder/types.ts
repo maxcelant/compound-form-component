@@ -1,4 +1,4 @@
-import { FormState, Control, UseFormHandleSubmit, FieldPath } from 'react-hook-form';
+import { FormState, Control, UseFormHandleSubmit } from 'react-hook-form';
 import { ButtonProps, GridSize, GridSpacing, SelectProps, TextFieldProps } from '@material-ui/core';
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import * as yup from 'yup';
@@ -22,22 +22,19 @@ export interface FormProps {
   schema: yup.ObjectSchema<any>;
 };
 
-export interface FormComponentProps {
-  name: string;
-  size?: GridSize; 
-};
-
-export interface AlertProps {
+export interface GridSizeProps {
   size?: GridSize;
 }
 
-export interface SuccessAlertProps extends AlertProps {
+export interface FormComponentProps extends GridSizeProps {
+  name: string;
+};
+
+export interface SuccessAlertProps extends GridSizeProps {
   message: string;
 }
 
-export interface InputFieldProps<T extends ObjectLike> {
-  name: FieldPath<T>;
-  size?: GridSize; 
+export interface InputFieldProps extends FormComponentProps {
   options?: TextFieldProps;
 };
 

@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { CurrentFormState, FormProps } from './types';
 import { makeDefaultValues } from './utils';
 import FormContext from './FormContext';
-import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName } from './components';
+import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName, FormDivider } from './components';
 
 function Form({ children, schema }: FormProps) {
   const { handleSubmit, control, formState, reset, watch } = useForm<yup.InferType<typeof schema>>({
@@ -26,6 +26,7 @@ function Form({ children, schema }: FormProps) {
   )
 }
 
+Form.Divider      = FormDivider;
 Form.Block        = FormBlock;
 Form.SuccessAlert = FormSuccessAlert;
 Form.ErrorAlert   = FormErrorAlert

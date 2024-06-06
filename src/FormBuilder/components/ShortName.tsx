@@ -3,10 +3,10 @@ import { useContext } from "react";
 import { Controller } from "react-hook-form";
 import { CmdbAppShortName } from "../../Mock/CmdbAppShortName";
 import FormContext from "../FormContext";
-import { ObjectLike, ShortNameProps } from "../types";
+import { FieldName, ObjectLike } from "../types";
 
 
-export function FormShortName<T extends ObjectLike>({ name, size = 4 }: ShortNameProps<T>) {
+export function FormShortName<T extends ObjectLike>({ name, size = 4 }: FieldName<T>) {
   const { control, schema } = useContext(FormContext);
   if (!schema) return null;
 

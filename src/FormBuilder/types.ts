@@ -1,5 +1,5 @@
 import { FormState, Control, UseFormHandleSubmit } from 'react-hook-form';
-import { ButtonProps, GridSize, GridSpacing, SelectProps, TextFieldProps, RadioGroupProps } from '@material-ui/core';
+import { ButtonProps, GridSize, GridSpacing, RadioGroupProps, SelectProps, TextFieldProps } from '@material-ui/core';
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import * as yup from 'yup';
 
@@ -27,21 +27,24 @@ export interface GridSizeProps {
   size?: GridSize;
 }
 
-export interface FormComponentProps extends GridSizeProps {
-  name: string;
-};
-
-export interface ShortNameProps<T extends ObjectLike> extends GridSizeProps {
+export interface FieldName<T extends ObjectLike> extends GridSizeProps {
   name: keyof T & string;
 }
 
-export interface SuccessAlertProps extends GridSizeProps {
-  message: string;
+interface ComponentProps<TOptions extends ObjectLike, TName extends ObjectLike> extends FieldName<TName> {
+  options?: TOptions;
 }
 
-export interface InputFieldProps<T extends ObjectLike> extends GridSizeProps {
-  name: keyof T & string;
-  options?: TextFieldProps;
+export type InputFieldProps<TName extends ObjectLike> = ComponentProps<TextFieldProps, TName>;
+
+interface ComponentWithItemsProps<TOptions extends ObjectLike, TName extends ObjectLike> extends ComponentProps<TOptions, TName> {
+  items: ListItem[];
+}
+
+export type DropdownProps<TName extends ObjectLike> = ComponentWithItemsProps<SelectProps, TName>;
+
+export type RadioProps<TName extends ObjectLike> = ComponentWithItemsProps<RadioGroupProps, TName> & {
+  direction?: 'row' | 'column'
 };
 
 export type ListItem = {
@@ -49,34 +52,19 @@ export type ListItem = {
   value: string | number | boolean;
 };
 
-export interface FormItemComponent<TOptions extends ObjectLike> extends FormComponentProps {
-  items: ListItem[];
-  options?: TOptions;
-}
-
-export interface DropdownProps<T extends ObjectLike> extends GridSizeProps {
-  name: keyof T & string;
-  items: ListItem[];
-  options?: SelectProps;
-}
-
-export interface RadioProps<T extends ObjectLike> extends GridSizeProps {
-  name: keyof T & string;
-  items: ListItem[];
-  options?: RadioGroupProps;
-  direction?: 'row' | 'column'
-}
-
 export type RowProps = {
   children: ReactNode[]
   spacing?: GridSpacing;
 };
 
-export interface DefaultButtonProps {
+export interface DefaultButtonProps extends GridSizeProps {
   title?: string;
   options?: ButtonProps;
-  size?: GridSize;
-}
+};
+
+export interface SuccessAlertProps extends GridSizeProps {
+  message: string;
+};
 
 export interface SubmitButtonProps extends DefaultButtonProps {
   onSubmit: (data: ObjectLike) => Promise<any>;

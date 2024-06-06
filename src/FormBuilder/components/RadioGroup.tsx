@@ -2,16 +2,12 @@ import { Grid, FormControl, Box, FormControlLabel, Radio, RadioGroup as RG } fro
 import React, { useContext } from "react";
 import { Controller } from "react-hook-form";
 import FormContext from "../FormContext";
-import { RadioGroupProps } from "../types";
+import { ObjectLike, RadioProps } from "../types";
 
 
-export function FormRadioGroup({ name, items, options, size = 4, direction = 'column' }: RadioGroupProps) {
+export function FormRadioGroup<T extends ObjectLike>({ name, items, options, size = 4, direction = 'column' }: RadioProps<T>) {
   const { control, schema } = useContext(FormContext);
   if (!schema) return null;
-  if (!(name in schema.fields)) {
-    throw new Error(`Invalid field name: ${name.toString()}`);
-  }
-
   return (
     <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
       <FormControl variant="outlined" fullWidth required>

@@ -1,7 +1,9 @@
 import { FormState, Control, UseFormHandleSubmit } from 'react-hook-form';
-import { ButtonProps, GridSize, GridSpacing, SelectProps, TextFieldProps } from '@material-ui/core';
+import { ButtonProps, GridSize, GridSpacing, SelectProps, TextFieldProps, RadioGroupProps } from '@material-ui/core';
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import * as yup from 'yup';
+
+export type InferType<T extends yup.ObjectSchema<any>> = yup.InferType<T>;
 
 export interface FormContextProps {
   handleSubmit: UseFormHandleSubmit<any>;
@@ -48,9 +50,16 @@ export interface FormItemComponent<TOptions extends ObjectLike> extends FormComp
   options?: TOptions;
 }
 
-export type DropdownProps = FormItemComponent<SelectProps>;
+export interface DropdownProps<T extends ObjectLike> extends GridSizeProps {
+  name: keyof T & string;
+  items: ListItem[];
+  options?: SelectProps;
+}
 
-export interface RadioGroupProps extends FormItemComponent<RadioGroupProps> {
+export interface RadioProps<T extends ObjectLike> extends GridSizeProps {
+  name: keyof T & string;
+  items: ListItem[];
+  options?: RadioGroupProps;
   direction?: 'row' | 'column'
 }
 

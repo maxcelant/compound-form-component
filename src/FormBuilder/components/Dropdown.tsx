@@ -6,7 +6,7 @@ import { DropdownProps, ObjectLike } from "../types";
 import { toCapital } from "../utils";
 import { ToolTip } from "./ToolTip";
 
-export function FormDropdown<T extends ObjectLike>({ name, items, options, tooltipMessage, size = 4 }: DropdownProps<T>) {
+export function FormDropdown<T extends ObjectLike>({ name, items, options, children, size = 4 }: DropdownProps<T>) {
   const { control, schema } = useContext(FormContext);
   if (!schema) return null;
   
@@ -38,9 +38,9 @@ export function FormDropdown<T extends ObjectLike>({ name, items, options, toolt
                     </MenuItem>
                   ))}
                 </Select>
-                {tooltipMessage && ( 
+                {children && ( 
                   <Box ml={1}>
-                    <ToolTip message={tooltipMessage} />
+                    { children }
                   </Box>
                 )}
               </Box>

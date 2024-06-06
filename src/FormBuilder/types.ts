@@ -1,7 +1,8 @@
 import { FormState, Control, UseFormHandleSubmit } from 'react-hook-form';
 import { ButtonProps, GridSize, GridSpacing, RadioGroupProps, SelectProps, TextFieldProps } from '@material-ui/core';
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { Dispatch, ReactElement, ReactNode, SetStateAction } from "react";
 import * as yup from 'yup';
+import { ToolTip } from './components';
 
 export type InferType<T extends yup.ObjectSchema<any>> = yup.InferType<T>;
 
@@ -23,6 +24,8 @@ export interface FormProps {
   children: ReactNode[];
 };
 
+export type ToolTipElement = ReactElement<typeof ToolTip>
+
 export interface GridSizeProps {
   size?: GridSize;
 }
@@ -33,15 +36,13 @@ export interface FieldName<T extends ObjectLike> extends GridSizeProps {
 
 interface ComponentProps<TOptions extends ObjectLike, TName extends ObjectLike> extends FieldName<TName> {
   options?: TOptions;
+  children?: ToolTipElement;
 }
 
-export type InputFieldProps<TName extends ObjectLike> = ComponentProps<TextFieldProps, TName> & {
-  tooltipMessage?: string;
-};
+export type InputFieldProps<TName extends ObjectLike> = ComponentProps<TextFieldProps, TName> 
 
 interface ComponentWithItemsProps<TOptions extends ObjectLike, TName extends ObjectLike> extends ComponentProps<TOptions, TName> {
   items: ListItem[];
-  tooltipMessage?: string;
 }
 
 export type DropdownProps<TName extends ObjectLike> = ComponentWithItemsProps<SelectProps, TName>

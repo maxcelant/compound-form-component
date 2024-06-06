@@ -4,10 +4,9 @@ import { Controller } from "react-hook-form";
 import FormContext from "../FormContext";
 import { InputFieldProps, ObjectLike } from "../types";
 import { toCapital } from "../utils";
-import { ToolTip } from "./ToolTip";
 
 
-export function FormInput<T extends ObjectLike>({ name, options, tooltipMessage, size = 4 }: InputFieldProps<T>) {
+export function FormInput<T extends ObjectLike>({ name, options, children, size = 4 }: InputFieldProps<T>) {
   const { control, schema } = useContext(FormContext)
   if (!schema) return null;
 
@@ -35,11 +34,11 @@ export function FormInput<T extends ObjectLike>({ name, options, tooltipMessage,
                 {...defaultOptions}
                 {...field}
               />
-              {tooltipMessage && ( 
-                  <Box ml={1}>
-                    <ToolTip message={tooltipMessage} />
-                  </Box>
-                )}
+              {children && ( 
+                <Box ml={1}>
+                  {children}
+                </Box>
+              )}
             </Box>
           )}
         />

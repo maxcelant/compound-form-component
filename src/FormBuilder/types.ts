@@ -19,7 +19,6 @@ export type ObjectLike = Record<string, any>;
 
 export interface FormProps {
   children: ReactNode[];
-  // schema: yup.ObjectSchema<any>;
 };
 
 export interface GridSizeProps {
@@ -34,10 +33,8 @@ export interface SuccessAlertProps extends GridSizeProps {
   message: string;
 }
 
-// todo: update later
-export interface InputFieldProps<T extends ObjectLike> {
+export interface InputFieldProps<T extends ObjectLike> extends GridSizeProps {
   name: keyof T & string;
-  size?: GridSize;
   options?: TextFieldProps;
 };
 

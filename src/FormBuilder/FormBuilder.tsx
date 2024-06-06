@@ -13,7 +13,7 @@ function FormBuilder<T extends yup.ObjectSchema<any>>(schema: T) {
   
   function Form({ children }: FormProps) {
     const { handleSubmit, control, formState, reset, watch } = useForm<InferType<T>>({
-      defaultValues: makeDefaultValues(schema) as any, // todo: fix later
+      defaultValues: makeDefaultValues(schema),
       mode: 'onChange',
       shouldUnregister: true,
       resolver: yupResolver(schema),

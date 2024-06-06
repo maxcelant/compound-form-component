@@ -4,7 +4,6 @@ import { Controller } from "react-hook-form";
 import FormContext from "../FormContext";
 import { DropdownProps, ObjectLike } from "../types";
 import { toCapital } from "../utils";
-import { ToolTip } from "./ToolTip";
 
 export function FormDropdown<T extends ObjectLike>({ name, items, options, children, size = 4 }: DropdownProps<T>) {
   const { control, schema } = useContext(FormContext);

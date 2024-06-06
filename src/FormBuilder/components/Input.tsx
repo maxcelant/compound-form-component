@@ -2,16 +2,13 @@ import { Grid, FormControl, TextField } from "@material-ui/core";
 import React, { useContext } from "react";
 import { Controller } from "react-hook-form";
 import FormContext from "../FormContext";
-import { InputFieldProps } from "../types";
+import { InputFieldProps, ObjectLike } from "../types";
 import { toCapital } from "../utils";
 
 
-export function FormInput({ name, options, size = 4 }: InputFieldProps) {
+export function FormInput<T extends ObjectLike>({ name, options, size = 4 }: InputFieldProps<T>) {
   const { control, schema } = useContext(FormContext)
   if (!schema) return null;
-  if (!(name in schema.fields)) {
-    throw new Error(`Invalid field name: ${name.toString()}`);
-  }
 
   let defaultOptions = options;
   if ((options && !('variant' in options)) || (!options)) {

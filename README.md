@@ -38,9 +38,6 @@ export const GitHubTeamSchema = yup.object({
 As you can see, it currently supports `Input`, `Dropdown`, `Row`, `RadioGroup`, `Divider`, `ToolTip` and more.
 
 ```tsx
-
-const buttonOptions: ButtonProps = 
-
 export const MyForm = () => {
   const Form = FormBuilder(GitHubTeamSchema)
   return (

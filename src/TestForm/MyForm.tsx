@@ -14,28 +14,24 @@ export const MyForm = () => {
       <Form.ErrorAlert />
       <Form.SuccessAlert message='GitHub Team created!' />
       <Form.Row>
-        <Form.Input name='teamName'>
-          <Form.ToolTip message='some foo msg'/> 
-        </Form.Input>
+        <Form.Input name='teamName'/>
         <Form.Input name='description' />
         <Form.Input name='username' />
       </Form.Row>
       <Form.Divider />
       <Form.Row>
-        <Form.Dropdown name='visibility' items={VISIBILITY_OPTIONS}>
-          <Form.ToolTip message='some foo msg'/> 
-        </Form.Dropdown>
+        <Form.Dropdown name='visibility' items={VISIBILITY_OPTIONS}/>
         <Form.Dropdown name='notificationSetting' items={NOTIFICATION_OPTIONS} />
         <Form.ShortName name='shortName' />
       </Form.Row>
-      <Form.RadioGroup 
+      {/* <Form.RadioGroup 
         name='pci' 
         direction='row'
         items={[
           { name: 'PCI', value: 'pci'},
           { name: 'Non-PCI', value: 'non-pci'},
         ]} 
-      />
+      /> */}
       <Form.Row>
         <Form.SubmitButton
           options={buttonOptions}

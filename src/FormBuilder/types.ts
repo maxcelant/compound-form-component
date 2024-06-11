@@ -64,6 +64,7 @@ export type RowProps = {
 export interface DefaultButtonProps extends GridSizeProps {
   title?: string;
   options?: ButtonProps;
+  style?: React.CSSProperties;
 };
 
 export interface SuccessAlertProps extends GridSizeProps {

@@ -4,7 +4,7 @@ import FormContext from "../FormContext";
 import { SubmitButtonProps } from "../types";
 
 
-export function FormSubmitButton({ onSubmit, title = 'Submit', size = 4, options }: SubmitButtonProps) {
+export function FormSubmitButton({ onSubmit, title = 'Submit', size = 4, style, options }: SubmitButtonProps) {
   const { handleSubmit, formState, state, setState } = useContext(FormContext);
   if (!handleSubmit || !formState || !setState || !state) return null;
 
@@ -18,18 +18,13 @@ export function FormSubmitButton({ onSubmit, title = 'Submit', size = 4, options
     }
   });
 
-  let defaultOptions = options;
-  if ((options && !('color' in options)) || (!options)) {
-    defaultOptions = { ...options, color: 'primary' };
-  }
-
   return (
     <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
       <Button 
         disabled={state.status === 'loading' || !formState.isValid} 
         onClick={submitWrapper}
-        style={{ marginTop: '20px' }}
-        {...defaultOptions} 
+        style={{ marginTop: '20px', ...style }}
+        {...{ color: 'primary', ...options }}
       >
         { title }
       </Button>

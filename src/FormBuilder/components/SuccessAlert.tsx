@@ -11,7 +11,7 @@ export function FormSuccessAlert({ message, style, size = 12 }: SuccessAlertProp
   if (!(state.status === 'success')) return <></>
   return (
     <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
-      <Alert severity="success" aria-label="success-message" style={{ ...style }}>
+      <Alert severity="success" aria-label="success-message" style={style}>
         {message}
       </Alert>
     </Grid>

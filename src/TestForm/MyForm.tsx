@@ -1,17 +1,11 @@
-import { ButtonProps } from "@material-ui/core"
 import { GitHubTeamSchema, NOTIFICATION_OPTIONS, VISIBILITY_OPTIONS } from "./schema"
 import FormBuilder from "../FormBuilder/FormBuilder"
 
-const buttonOptions: ButtonProps = {
-  variant: 'outlined',
-  fullWidth: true,
-}
-
 export const MyForm = () => {
-  const Form = FormBuilder(GitHubTeamSchema)
+  const Form = FormBuilder(GitHubTeamSchema);
   return (
     <Form>
-      <Form.SuccessAlert message='GitHub Team created!'/>
+      <Form.SuccessAlert message='GitHub Team created!' />
       <Form.Row>
         <Form.Input name='teamName'>
           <Form.ToolTip message="your github team" />
@@ -35,7 +29,6 @@ export const MyForm = () => {
       />
       <Form.Row>
         <Form.SubmitButton
-          options={buttonOptions}
           onSubmit={async (data: any) => console.log('submitted', data)}
         />
         <Form.Block />

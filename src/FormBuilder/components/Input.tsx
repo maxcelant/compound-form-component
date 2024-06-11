@@ -10,11 +10,6 @@ export function FormInput<T extends ObjectLike>({ name, options, children, size 
   const { control, schema } = useContext(FormContext)
   if (!schema) return null;
 
-  let defaultOptions = options;
-  if ((options && !('variant' in options)) || (!options)) {
-    defaultOptions = { ...options, variant: 'outlined' };
-  }
-
   return (
     <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
       <FormControl variant="outlined" fullWidth>
@@ -31,7 +26,7 @@ export function FormInput<T extends ObjectLike>({ name, options, children, size 
                 required
                 error={fieldState.error ? true : false}
                 helperText={fieldState.error ? fieldState.error.message : null}
-                {...defaultOptions}
+                {...{ variant: 'outlined', ...options }}
                 {...field}
               />
               {children && ( 

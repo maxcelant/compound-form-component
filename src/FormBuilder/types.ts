@@ -26,11 +26,12 @@ export interface FormProps {
 
 export type ToolTipElement = ReactElement<typeof FormToolTip>
 
-export interface GridSizeProps {
+export interface BaseProps {
   size?: GridSize;
+  style?: React.CSSProperties;
 }
 
-export interface FieldName<T extends ObjectLike> extends GridSizeProps {
+export interface FieldName<T extends ObjectLike> extends BaseProps {
   name: keyof T & string;
 }
 
@@ -61,13 +62,13 @@ export type RowProps = {
   spacing?: GridSpacing;
 };
 
-export interface DefaultButtonProps extends GridSizeProps {
+export interface DefaultButtonProps extends BaseProps {
   title?: string;
   options?: ButtonProps;
   style?: React.CSSProperties;
 };
 
-export interface SuccessAlertProps extends GridSizeProps {
+export interface SuccessAlertProps extends BaseProps {
   message: string;
 };
 

@@ -11,7 +11,7 @@ export const MyForm = () => {
   const Form = FormBuilder(GitHubTeamSchema)
   return (
     <Form>
-      <Form.SuccessAlert message='GitHub Team created!' />
+      <Form.SuccessAlert message='GitHub Team created!'/>
       <Form.Row>
         <Form.Input name='teamName'>
           <Form.ToolTip message="your github team" />

@@ -21,7 +21,7 @@ export function makeDefaultValues<T extends FieldValues>(schema: yup.ObjectSchem
     object: {}
   }
 
-  for (const key in shape) {
+  for (const key of Object.keys(shape)) {
     if (shape[key].type in shapeMap) {
       defaultValues[key] = shapeMap[shape[key].type as keyof ShapeMap];
     } else {

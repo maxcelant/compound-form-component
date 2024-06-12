@@ -19,6 +19,9 @@ export const MyForm = () => {
         <Form.Dropdown name='notificationSetting' items={NOTIFICATION_OPTIONS} />
         <Form.ShortName name='shortName' />
       </Form.Row>
+      <Form.Row>
+        <Form.DynamicList name='owners' />
+      </Form.Row>
       <Form.RadioGroup 
         name='pci' 
         direction='row'

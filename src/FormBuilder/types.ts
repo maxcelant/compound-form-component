@@ -1,17 +1,14 @@
-import { FormState, Control, UseFormHandleSubmit } from 'react-hook-form';
 import { ButtonProps, GridSize, GridSpacing, RadioGroupProps, SelectProps, TextFieldProps } from '@material-ui/core';
 import { Dispatch, ReactElement, ReactNode, SetStateAction } from "react";
 import * as yup from 'yup';
 import { FormToolTip } from './components';
+import { UseFormReturn } from 'react-hook-form';
 
 export type InferType<T extends yup.ObjectSchema<any>> = yup.InferType<T>;
 
-export interface FormContextProps {
-  handleSubmit: UseFormHandleSubmit<any>;
-  control: Control<any>;
-  formState: FormState<any>;
+export interface FormContextProps<T extends yup.ObjectSchema<any, yup.AnyObject, any, "">> {
+  ctx: UseFormReturn<InferType<T>>;
   schema: yup.ObjectSchema<any>;
-  reset: (values?: any, options?: any) => void;
   state: CurrentFormState;
   setState: Dispatch<SetStateAction<CurrentFormState>>;
 };

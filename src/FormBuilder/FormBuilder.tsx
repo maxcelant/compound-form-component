@@ -5,28 +5,30 @@ import * as yup from 'yup'
 import { CurrentFormState, FormProps, InferType } from './types';
 import { makeDefaultValues } from './utils';
 import FormContext from './FormContext';
-import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName, FormDivider, FormToolTip } from './components';
+import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName, FormDivider, FormToolTip, FormDynamicList } from './components';
 
 function FormBuilder<T extends yup.ObjectSchema<any>>(schema: T) {
   
   function Form({ children }: FormProps) {
-    const { handleSubmit, control, formState, reset, watch } = useForm<InferType<T>>({
+    const ctx = useForm<InferType<T>>({
       defaultValues: makeDefaultValues(schema),
       mode: 'onChange',
       shouldUnregister: true,
       resolver: yupResolver(schema),
     });
+
   
     const [state, setState] = useState<CurrentFormState>({ status: 'init' })
   
-    console.log(JSON.stringify(watch(), null, 2))
+    console.log(JSON.stringify(ctx.watch(), null, 2))
     
     return (
-      <FormContext.Provider value={{ handleSubmit, control, formState, schema, reset, state, setState }}>
+      <FormContext.Provider value={{ ctx, schema, state, setState  }}>
         { children }
       </FormContext.Provider>
     )
   }
+
   Form.ToolTip      = FormToolTip;
   Form.Divider      = FormDivider;
   Form.Block        = FormBlock;
@@ -35,6 +37,7 @@ function FormBuilder<T extends yup.ObjectSchema<any>>(schema: T) {
   Form.Row          = FormRow;
   Form.ClearButton  = FormClearButton;
   Form.SubmitButton = FormSubmitButton; 
+  Form.DynamicList  = FormDynamicList<InferType<T>>;
   Form.Input        = FormInput<InferType<T>>;
   Form.Dropdown     = FormDropdown<InferType<T>>;
   Form.RadioGroup   = FormRadioGroup<InferType<T>>;

@@ -6,15 +6,15 @@ import { DropdownProps, ObjectLike } from "../types";
 import { toCapital } from "../utils";
 
 export function FormDropdown<T extends ObjectLike>({ name, items, options, children, size = 4 }: DropdownProps<T>) {
-  const { control, schema } = useContext(FormContext);
-  if (!schema) return null;
+  const { ctx } = useContext(FormContext);
+  if (!ctx) return null;
   
   return (
     <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
       <FormControl variant="outlined" fullWidth required>
         <Controller
           name={name}
-          control={control}
+          control={ctx.control}
           render={({ field }) => (
             <>
               <InputLabel htmlFor={`${name}-dropdown`}>{toCapital(name)}</InputLabel>

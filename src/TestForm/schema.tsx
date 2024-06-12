@@ -22,6 +22,13 @@ export const GitHubTeamSchema = yup.object({
   username: yup.string().required(),
   pci: yup.string().required(),
   shortName: yup.string().required(),
+  owners: yup
+    .array()
+    .of(
+      yup.string().matches(/^\d+$/, "Each owner must be a string of numbers.")
+    )
+    .required("Owners are required.")
+    .min(1, "At least one owner is required."),
   visibility: yup
     .string()
     .oneOf(VISIBILITY_OPTIONS.map(o => o.value))

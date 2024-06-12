@@ -7,15 +7,15 @@ import { FieldName, ObjectLike } from "../types";
 
 
 export function FormShortName<T extends ObjectLike>({ name, size = 4 }: FieldName<T>) {
-  const { control, schema } = useContext(FormContext);
-  if (!schema) return null;
+  const { ctx } = useContext(FormContext);
+  if (!ctx) return null;
 
   return (
     <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
       <FormControl variant="outlined" fullWidth required>
         <Controller
           name={name}
-          control={control}
+          control={ctx.control}
           render={({ field: { onChange } }) => (
             <CmdbAppShortName
               onChange={value => onChange(value.shortName)}

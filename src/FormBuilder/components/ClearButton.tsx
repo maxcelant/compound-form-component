@@ -16,10 +16,10 @@ const clearButtonDefaults = {
 };
 
 export function FormClearButton({ title = 'Clear', size = 4, style, options }: DefaultButtonProps) {
-  const { reset, schema } = useContext(FormContext);
-  if(!reset || !schema) return null;
+  const { ctx, schema } = useContext(FormContext);
+  if(!ctx || !schema) return null;
 
-  const handleReset = () => reset(makeDefaultValues(schema));
+  const handleReset = () => ctx.reset(makeDefaultValues(schema));
 
   return (
     <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>

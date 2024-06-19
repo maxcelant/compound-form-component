@@ -1,11 +1,12 @@
 import { Button, ButtonProps, Grid } from "@material-ui/core";
 import React, { useContext } from "react";
 import FormContext from "../FormContext";
-import { SubmitButtonProps } from "../types";
+import { ObjectLike, SubmitButtonProps } from "../types";
+import { componentGridStyle } from "../styles";
 
 const submitButtonDefaults = {
   options: {
-    variant: 'outlined',
+    variant: 'contained',
     fullWidth: true,
     color: 'primary',
   } as ButtonProps,
@@ -14,22 +15,29 @@ const submitButtonDefaults = {
   } as React.CSSProperties,
 };
 
-export function FormSubmitButton({ onSubmit, title = 'Submit', size = 4, style, options }: SubmitButtonProps) {
+/**
+ * Button to submit the form
+ * @param onSubmit function to call when the form is submitted
+ * @param title text to display on the button
+ * @param size size of the button
+ * @param style optional style object
+ * @param options optional options object
+ */
+export function FormSubmitButton<T extends ObjectLike>({ onSubmit, title = 'Submit', size = 4, style, options }: SubmitButtonProps<T>) {
   const { ctx, state, setState } = useContext(FormContext);
-  if (!ctx || !setState || !state) return null;
 
   const submitWrapper = ctx.handleSubmit(async (data) => {
-    setState((prev) => ({ ...prev, status: 'loading' }));
+    setState(prev => ({ ...prev, status: 'loading' }));
     try {
       await onSubmit(data);
-      setState((prev) => ({ ...prev, status: 'success' }));
+      setState(prev => ({ ...prev, status: 'success' }));
     } catch (e: any) {
-      setState((prev) => ({ ...prev, status: 'error', message: e.message }));
+      setState(prev => ({ ...prev, status: 'error', message: e.message }));
     }
   });
 
   return (
-    <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
+    <Grid item xs={12} sm={12} md={size} style={componentGridStyle}>
       <Button 
         disabled={state.status === 'loading' || !ctx.formState.isValid} 
         onClick={submitWrapper}

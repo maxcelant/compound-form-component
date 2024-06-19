@@ -11,3 +11,5 @@ export * from './Divider';
 export * from './SuccessAlert';
 export * from './ToolTip';
 export * from './DynamicList';
+export * from './AutoComplete';
+export * from './DynamicText';

@@ -2,47 +2,75 @@ import { Grid, FormControl, TextField, Box, Button } from "@material-ui/core";
 import React, { useState, useContext } from "react";
 import { Controller } from "react-hook-form";
 import FormContext from "../FormContext";
-import { InputFieldProps, ObjectLike } from "../types";
+import { DynamicListProps, ObjectLike } from "../types";
 import { toCapital } from "../utils";
+import * as yup from 'yup';
+import { componentGridStyle, toolTipChildStyle } from "../styles";
 
+/**
+  * Creates an Dynamic List subcomponent
+  * @param name - name of the field
+  * @param title - title of the field
+  * @param buttonTitle - title of the button
+  * @param options - options for the field
+  * @param children - children for the field
+  * @param size - size of the field
+  */
+export function FormDynamicList<T extends ObjectLike>({ name, title, buttonTitle = 'Add', options, children, size = 4 }: DynamicListProps<T>) {
+  const { ctx, schema } = useContext(FormContext);
+  const [input, setInput] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
 
-export function FormDynamicList<T extends ObjectLike>({ name, options, children, size = 4 }: InputFieldProps<T>) {
-  const { ctx } = useContext(FormContext);
-  const [value, setValue] = useState<string>('');
-  if (!ctx) return null;
-
-  const handleAddClick = (field: any) => {
-    if (value.trim() !== '') {
-      field.onChange([...field.value, value.trim()]);
-      setValue('');
+  const validateInput = async (value: string) => {
+    try {
+      const arraySchema = schema.fields[name as keyof T] as yup.ArraySchema<any, any>;
+      const stringSchema = arraySchema.innerType as yup.StringSchema;
+      await stringSchema.validate(value.trim());
+      setError(null);
+    } catch (validationError: any) {
+      setError(validationError.message);
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInput(value);
+    validateInput(value);
+  };
+
+  const handleAddClick = (field: any) => {
+    if (error || input.trim() === '') return;
+    field.onChange([...field.value, input.trim()]);
+    setInput('');
+  };
+
   return (
-    <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
+    <Grid item xs={12} sm={12} md={size} style={componentGridStyle}>
       <FormControl variant="outlined" fullWidth>
       <Controller
           name={name}
           control={ctx.control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <Box display="flex" alignItems="center">
               <TextField 
                 aria-label={`${name.toString().toLowerCase()}-textfield`}
-                label={toCapital(name)}
+                label={title || toCapital(name)}
                 id={name}
                 fullWidth
                 required
-                error={fieldState.error ? true : false}
-                helperText={fieldState.error ? fieldState.error.message : null}
-                {...{ variant: 'outlined', ...options }}
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
+                error={error ? true : false}
+                helperText={error}
+                {...{ variant: 'standard', ...options }}
+                value={input}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
               />
               <Button 
                 onClick={() => handleAddClick(field)}
-              >Add</Button>
+                variant="outlined"
+                style={{ margin: '0px 0px 10px 10px', height: '40px', whiteSpace: 'nowrap', flexGrow: 1, padding: '0px 20px' }}
+              >{ buttonTitle }</Button>
               {children && ( 
-                <Box ml={1}>
+                <Box ml={1} style={toolTipChildStyle}>
                   {children}
                 </Box>
               )}

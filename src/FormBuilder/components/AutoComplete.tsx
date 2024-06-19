@@ -1,13 +1,14 @@
-import { Grid, FormControl, InputLabel, Select, MenuItem, Box } from "@material-ui/core";
+import { Grid, FormControl, Box, TextField } from "@material-ui/core";
 import React, { useContext } from "react";
 import { Controller } from "react-hook-form";
 import FormContext from "../FormContext";
-import { DropdownProps, ObjectLike } from "../types";
+import { AutoCompleteProps, ListItem, ObjectLike } from "../types";
 import { toCapital } from "../utils";
+import { Autocomplete } from "@material-ui/lab";
 import { componentGridStyle, toolTipChildStyle } from "../styles";
 
 /**
- * Creates an Dropdown subcomponent
+ * Creates an Autocomplete subcomponent
  * @param name your schema field name
  * @param title your schema field title
  * @param items an array of objects with a name and value property
@@ -16,7 +17,7 @@ import { componentGridStyle, toolTipChildStyle } from "../styles";
  * @param children optional children components
  * @param size optional size of the component
  */
-export function FormDropdown<T extends ObjectLike>({ name, title, items, style, options, children, size = 4 }: DropdownProps<T>) {
+export function FormAutoComplete<T extends ObjectLike>({ name, title, items, style, options, children, size = 4 }: AutoCompleteProps<T>) {
   const { ctx } = useContext(FormContext);
   return (
     <Grid item xs={12} sm={12} md={size} style={componentGridStyle}>
@@ -26,30 +27,28 @@ export function FormDropdown<T extends ObjectLike>({ name, title, items, style, 
           control={ctx.control}
           render={({ field }) => (
             <>
-              <InputLabel htmlFor={`${name}-dropdown`}>{toCapital(name)}</InputLabel>
               <Box display="flex" alignItems="center">
-                <Select
-                  id={`${name}-dropdown`}
-                  inputProps={{ 'aria-label': `${name}-dropdown` }}
-                  label={title || toCapital(name)}
-                  style={style}
-                  {...field}
+                <Autocomplete
+                  id={`${name}-autocomplete`}
+                  options={items}
+                  getOptionLabel={(option: ListItem) => option.name}
+                  onChange={(_, value: ListItem) => field.onChange(value?.value || '')}
+                  fullWidth
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={title || toCapital(name)}
+                      variant="outlined"
+                      fullWidth
+                      required
+                      style={style}
+                    />
+                  )}
                   {...options}
-                  fullWidth 
-                >
-                  {items.map((item: any) => (
-                    <MenuItem
-                      key={item.value}
-                      value={item.value}
-                      aria-label={`${name}-option-${item.value.toLowerCase()}`}
-                    >
-                      {item.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-                {children && ( 
+                />
+                {children && (
                   <Box ml={1} style={toolTipChildStyle}>
-                    { children }
+                    {children}
                   </Box>
                 )}
               </Box>

@@ -4,14 +4,21 @@ import { Controller } from "react-hook-form";
 import FormContext from "../FormContext";
 import { InputFieldProps, ObjectLike } from "../types";
 import { toCapital } from "../utils";
+import { componentGridStyle, toolTipChildStyle } from "../styles";
 
-
-export function FormInput<T extends ObjectLike>({ name, options, children, size = 4 }: InputFieldProps<T>) {
+/**
+ * Creates an Input subcomponent
+ * @param name your schema field name
+ * @param title your schema field title
+ * @param style optional style object
+ * @param options optional options object
+ * @param children optional children components
+ * @param size optional size of the component
+ */
+export function FormInput<T extends ObjectLike>({ name, title, style, options, children, size = 4 }: InputFieldProps<T>) {
   const { ctx } = useContext(FormContext)
-  if (!ctx) return null;
-
   return (
-    <Grid item xs={12} sm={size} md={size} style={{ margin: '10px 0px' }}>
+    <Grid item xs={12} sm={12} md={size} style={componentGridStyle}>
       <FormControl variant="outlined" fullWidth>
       <Controller
           name={name}
@@ -20,17 +27,18 @@ export function FormInput<T extends ObjectLike>({ name, options, children, size 
             <Box display="flex" alignItems="center">
               <TextField 
                 aria-label={`${name.toString().toLowerCase()}-textfield`}
-                label={toCapital(name)}
+                label={title || toCapital(name)}
                 id={name}
                 fullWidth
                 required
                 error={fieldState.error ? true : false}
                 helperText={fieldState.error ? fieldState.error.message : null}
+                style={style}
                 {...{ variant: 'outlined', ...options }}
                 {...field}
               />
               {children && ( 
-                <Box ml={1}>
+                <Box ml={1} style={toolTipChildStyle}>
                   {children}
                 </Box>
               )}

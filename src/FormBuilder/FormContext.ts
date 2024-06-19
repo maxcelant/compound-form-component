@@ -1,6 +1,15 @@
 import { createContext } from "react";
-import { FormContextProps } from "./types";
+import { CurrentFormState, FormContextProps, InferType } from "./types";
+import { UseFormReturn } from "react-hook-form";
+import * as yup from "yup";
 
-const FormContext = createContext<Partial<FormContextProps<any>>>({});
+const defaultFormContext: FormContextProps<any> = {
+  ctx: {} as UseFormReturn<InferType<any>>,
+  schema: {} as yup.ObjectSchema<any>, 
+  state: {} as CurrentFormState, 
+  setState: () => {}, 
+};
+
+const FormContext = createContext<FormContextProps<any>>(defaultFormContext);
 
 export default FormContext;

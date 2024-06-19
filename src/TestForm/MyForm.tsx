@@ -1,8 +1,8 @@
+import useFormBuilder from "../FormBuilder/useFormBuilder";
 import { GitHubTeamSchema, NOTIFICATION_OPTIONS, VISIBILITY_OPTIONS } from "./schema"
-import FormBuilder from "../FormBuilder/FormBuilder"
 
 export const MyForm = () => {
-  const Form = FormBuilder(GitHubTeamSchema);
+  const Form = useFormBuilder(GitHubTeamSchema);
   return (
     <Form>
       <Form.SuccessAlert message='GitHub Team created!' />

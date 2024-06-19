@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { CurrentFormState, FormProps, InferType } from './types';
 import { makeDefaultValues } from './utils';
 import FormContext from './FormContext';
-import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormShortName, FormDivider, FormToolTip, FormDynamicList, FormAutoComplete, FormDynamicText } from './components';
+import { FormBlock, FormErrorAlert, FormInput, FormDropdown, FormRow, FormRadioGroup, FormClearButton, FormSubmitButton, FormSuccessAlert, FormDivider, FormToolTip, FormDynamicList, FormAutoComplete, FormDynamicText } from './components';
 import { useTheme } from '@material-ui/core';
 
 /**
@@ -57,7 +57,6 @@ export default function useFormBuilder<T extends yup.ObjectSchema<any>>(schema: 
   Form.Input        = FormInput<InferType<T>>;
   Form.Dropdown     = FormDropdown<InferType<T>>;
   Form.RadioGroup   = FormRadioGroup<InferType<T>>;
-  Form.ShortName    = FormShortName<InferType<T>>;
   Form.AutoComplete = FormAutoComplete<InferType<T>>;
 
   return Form;

@@ -2,7 +2,7 @@
 
 A React hook that allows you to create a dynamic form from building blocks of your choice. All the pieces are pre-configured `material-ui` components like `Select`, `RadioGroup`, etc.
 
-Everything is customizable, but this provides a simpler way to quickly create forms.
+Everything is customizable, but this provides a simpler way to quickly create forms. Checks out the `/docs` for more in-depth info on how to use it!
 
 ### Setup
 

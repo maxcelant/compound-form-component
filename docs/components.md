@@ -148,25 +148,6 @@ Use this component to create a radio group of items.
 ```
 
 ---
-### ShortName
-Use this component to capture CMDB short name from the user.
-
-**Props**:
-
-- `name`: name of field in your schema.
-- `onBlur?`: blur setting for `CmdbAppShortName` picker.
-- `size?`: size of component (defaults to 4).
-**Usage:**
-
-```ts
-<Form>
-  <Form.Row>
-    <Form.ShortName name="shortName" />
-  </Form.Row>
-</Form>
-```
-
----
 ### AutoComplete
 Use this component to capture a string from the user with autocompletion.
 

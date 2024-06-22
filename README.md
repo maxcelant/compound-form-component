@@ -1,6 +1,6 @@
-# FormBuilder
+# useFormBuilder
 
-This allows you to create a dynamic form from building blocks of your choice. All the pieces are pre-configured `material-ui` components like `Select`, `RadioGroup`, etc.
+A React hook that allows you to create a dynamic form from building blocks of your choice. All the pieces are pre-configured `material-ui` components like `Select`, `RadioGroup`, etc.
 
 Everything is customizable, but this provides a simpler way to quickly create forms.
 
@@ -39,7 +39,7 @@ As you can see, it currently supports `Input`, `Dropdown`, `Row`, `RadioGroup`, 
 
 ```tsx
 export const MyForm = () => {
-  const Form = FormBuilder(GitHubTeamSchema)
+  const Form = useFormBuilder(GitHubTeamSchema)
   return (
     <Form>
       <Form.ErrorAlert />
